@@ -1,0 +1,6 @@
+{
+  "ignore": [".git", "node_modules"],
+  "watch": ["routes", "app.ts"],
+  "exec": "node sls.js",
+  "ext": "html, js, ts, tsx, json"
+}

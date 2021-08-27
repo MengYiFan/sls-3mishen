@@ -1,0 +1,40 @@
+app: koa-3mish
+component: koa
+name: koa-3mish
+stage: dev
+
+inputs: 
+  src: 
+    src: ./
+    exclude: 
+      - .env
+      - node_modules/** # 打包在 layer 里，加快 deploy 速度
+  type: web
+  name: ${name}
+  region: ap-guangzhou
+  runtime: Nodejs12.16
+  memorySize: 512
+  events: 
+    - apigw: 
+        parameters: 
+          protocols: 
+            - http
+            - https
+          environment: release
+          endpoints: 
+            - path: /
+              method: ANY
+  functionConf:
+    timeout: 60
+    environment:
+      variables:
+        NODE_ENV: production
+  apigatewayConf:
+    enableCORS: true
+    protocols:
+      - https
+      - http
+    environment: release
+  layers:
+    - name: ${output:${stage}:${app}:${name}-layer.name}
+      version: ${output:${stage}:${app}:${name}-layer.version}
