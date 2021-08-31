@@ -21,6 +21,7 @@
     "koa": "^2.11.0",
     "koa-body": "^4.2.0",
     "koa-sendfile": "^2.0.1",
+    "mysql2": "^2.3.0",
     "tsconfig-paths": "^3.11.0"
   },
   "devDependencies": {

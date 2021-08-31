@@ -11,9 +11,10 @@ inputs:
       - node_modules/** # 打包在 layer 里，加快 deploy 速度
   type: web
   name: ${name}
-  region: ap-shanghai
+  region: ${env:REGION}
   runtime: Nodejs12.16
   memorySize: 512
+  timeout: 30
   events: 
     - apigw: 
         parameters: 
@@ -38,3 +39,10 @@ inputs:
   layers:
     - name: ${output:${stage}:${app}:${name}-layer.name}
       version: ${output:${stage}:${app}:${name}-layer.version}
+  vpcConfig:
+    vpcId: ${output:${stage}:${app}:${name}-vpc.vpcId}
+    subnetId: ${output:${stage}:${app}:${name}-vpc.subnetId}
+  environment:
+    variables:
+      HOST: ${output:${stage}:${app}:${name}-db.connection.ip}
+      PASSWORD: ${output:${stage}:${app}:${name}-db.adminPassword}
