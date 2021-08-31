@@ -11,7 +11,7 @@ inputs:
       - node_modules/** # 打包在 layer 里，加快 deploy 速度
   type: web
   name: ${name}
-  region: ap-guangzhou
+  region: ap-shanghai
   runtime: Nodejs12.16
   memorySize: 512
   events: 

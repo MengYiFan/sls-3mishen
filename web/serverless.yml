@@ -1,0 +1,43 @@
+component: nextjs
+app: web-3mish
+name: web-3mish
+stage: dev
+
+inputs:
+  src:
+    dist: ./
+    hook: npm run build
+    exclude:
+      - .env
+      - node_modules/**
+  region: ap-shanghai
+  functionName: ${name}
+  runtime: Nodejs12.16
+  staticConf:
+    cosConf:
+      bucket: cos-${name} # 将前端静态资源部署到oss，减少scf的调用频次
+  apigatewayConf:
+    enableCORS: true
+    protocols:
+      - https
+      - http
+    environment: release
+    # customDomains: # 如果需要，可以自己配置自定义域名
+    #   - domain: xxxxx 
+    #     certificateId: xxxxx # 证书 ID
+    #     # 这里将 API 网关的 release 环境映射到根路径
+    #     isDefaultMapping: false
+    #     pathMappingSet:
+    #       - path: /
+    #         environment: release
+    #     protocols:
+    #       - https
+  functionConf:
+    timeout: 60
+    memorySize: 128
+    environment:
+      variables:
+        apiUrl: ${output:${stage}:${app}:3mish-api.apigw.url} #
+  layers:
+    - name: ${output:${stage}:${app}:${name}-layer.name}
+      version: ${output:${stage}:${app}:${name}-layer.version}

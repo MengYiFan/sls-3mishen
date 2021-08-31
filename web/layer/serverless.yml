@@ -1,10 +1,10 @@
 component: layer
-app: koa-3mish
-name: koa-3mish-layer
+app: web-3mish
+name: web-3mish-layer
 stage: dev
 
 inputs:
-  region: ap-shanghai
+  region: ap-shanghai 
   name: ${name}
   src:
     src: ../node_modules

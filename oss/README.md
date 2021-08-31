@@ -1,4 +1,0 @@
-- region:    ap-guangzhou
-- bucket:    xart-oss-1253427742
-- cosOrigin: xart-oss-1253427742.cos.ap-guangzhou.myqcloud.com
-- url:       https://xart-oss-1253427742.cos.ap-guangzhou.myqcloud.com

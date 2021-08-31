@@ -1,5 +1,7 @@
 **/*.env
 **/node_modules
+**/.next
+**/tf/model
 
 # Log files
 **/npm-debug.log*

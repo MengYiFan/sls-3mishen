@@ -1,6 +1,6 @@
 component: cos
-name: 3mish-cos
-app: 3mish-cos
+name: 3mish-web-cos
+app: 3mish-web-cos
 stage: dev
 
 inputs:

@@ -1,6 +1,6 @@
 component: layer
-app: koa-3mish
-name: koa-3mish-layer
+app: img-tf
+name: img-tf-layer
 stage: dev
 
 inputs:

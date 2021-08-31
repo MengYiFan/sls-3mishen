@@ -1,4 +1,5 @@
 require("dotenv").config()
+import fs from 'fs'
 import Router from '@koa/router'
 import util from 'util'
 import COS from 'cos-nodejs-sdk-v5'
@@ -35,22 +36,25 @@ router.get('/hello', async function (ctx, next) {
   ctx.body = 'Hello, 3mish sls.'
 })
 
+const IMG_DIR = 'images'
+
 router.get("/api/images", async (ctx) => {
   const files = await getBucketSync({
     ...cosInfo,
-    Prefix: "result",
+    Prefix: IMG_DIR,
   })
-
+  
   const cosURL = `https://${cosInfo.Bucket}.cos.${cosInfo.Region}.myqcloud.com`
-  ctx.body = files.Contents.map((it) => {
-    const [timestamp, size] = it.Key.split(".jpg")[0].split("__")
+  ctx.body = files.Contents.map((image) => {
+    const [timestamp, size] = image.Key.split(".jpg")[0].split("__")
     const [width, height] = size.split("_")
+    
     return {
-      url: `${cosURL}/${it.Key}`,
+      url: `${cosURL}/${image.Key}`,
       width,
       height,
       timestamp: Number(timestamp),
-      name: it.Key,
+      name: image.Key,
     }
   })
     .filter(Boolean)
@@ -58,23 +62,28 @@ router.get("/api/images", async (ctx) => {
 })
 
 router.post("/api/images/upload", async (ctx) => {
-  console.log(ctx.request.files.file)
   const { imgBase64, style } = JSON.parse(ctx.request.body)
   const buf = Buffer.from(imgBase64.replace(/^data:image\/\w+;base64,/, ""), 'base64')
-  // 调用预先提供 tensorflow 服务加工图片，后面替换成你自己的服务
-  const { data } = await axios.post('https://service-edtflvxk-1254074572.gz.apigw.tencentcs.com/release/', {
+  const { data } = await axios.post('https://service-mthxz2ip-1253427742.sh.apigw.tencentcs.com/release/', {
     imgBase64: buf.toString('base64'),
     style
   })
+
   if (data.success) {
     const afterImg = await putObjectSync({
       ...cosInfo,
-      Key: `result/${Date.now()}__400_200.jpg`,
-      Body: Buffer.from(data.data, 'base64'),
+      Key: `${IMG_DIR}/${Date.now()}__400_200.jpg`,
+      Body: Buffer.from(data.data, 'base64')
     })
+  
+    fs.writeFileSync('test.txt', JSON.stringify(data, null, '  '))
     ctx.body = {
       success: true,
       data: 'https://' + afterImg.Location
+    }
+  } else {
+    ctx.body = {
+      success: false
     }
   }
 })
