@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "sls.js",
+  "typings": "./index.d.ts",
   "scripts": {
-    "start": "nodemon",
-    "dev": "nodemon --inspect --watch app.ts --watch routes --ext html,js,ts,tsx,json sls.js",
+    "start": "nodemon --config nodemon.json -e ts,tsx sls.js",
+    "dev": "cross-env NODE_ENV=development nodemon --watch routes --watch controllers --watch middlewares --watch utils --watch app.ts --watch config --ext html,js,ts,tsx,json -e ts,tsx --exec ts-node sls.js",
     "deplpy": "sls deploy",
     "layer": "sls deploy --target=./layer",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,6 +26,15 @@
     "tsconfig-paths": "^3.11.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/koa": "^2.13.4",
+    "@types/koa-bodyparser": "^4.3.3",
+    "@types/koa__cors": "^3.0.3",
+    "@types/koa__router": "^8.0.7",
+    "@types/lodash": "^4.14.172",
+    "@types/node": "^16.7.10",
+    "cross-env": "^7.0.3",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   }

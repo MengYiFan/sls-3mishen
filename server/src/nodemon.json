@@ -1,0 +1,16 @@
+{
+  "verbose": true,
+  "delay": 300,
+  "ignore": [".git", "node_modules"],
+  "watch": [
+    "routes", "controllers", "middlewares", "utils", "app.ts", "config"
+  ],
+  "exec": "ts-node sls.js",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "html, js, ts, tsx, json",
+  "execMap": {
+    "js": "node"
+  }
+}

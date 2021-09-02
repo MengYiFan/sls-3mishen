@@ -15,7 +15,7 @@ app.use(koaBody({
 }))
 
 const index = require('./routes/index')
-app.use(index.routes(), index.allowedMethods())
+app.use(index.routes()).use(index.allowedMethods())
 app.use(router.routes()).use(router.allowedMethods())
 
 const port = 8080

@@ -2,13 +2,36 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@routes/*": ["routes/*"]
+      "@utils/*": ["utils/*"]
     },
     "target": "es2018",
     "module": "commonjs",
     "lib": ["es2018", "esnext.asynciterable"],
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": true,
+    "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "esModuleInterop": true
-  }
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "allowSyntheticDefaultImports":true,
+    "importHelpers": true,
+    "noImplicitAny": false,
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "config/**/*.ts",
+    "controllers/**/*.ts",
+    "core/**/*.ts",
+    "middlewares/**/*.ts",
+    "routes/**/*.ts",
+    "utils/**/*.ts",
+    "index.d.ts",
+    "app.ts"
+  ]
 }

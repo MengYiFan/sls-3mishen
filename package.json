@@ -1,0 +1,32 @@
+{
+  "name": "ss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "commit": "git-cz",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MengYiFan/sls-3mishen.git"
+  },
+  "author": "mish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MengYiFan/sls-3mishen/issues"
+  },
+  "homepage": "https://github.com/MengYiFan/sls-3mishen#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "husky": "^7.0.2",
+    "pretty-quick": "^3.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  }
+}
