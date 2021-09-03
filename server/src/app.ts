@@ -14,6 +14,10 @@ app.use(koaBody({
   textLimit: "10mb"
 }))
 
+// middlewares
+import * as requestTrack from 'middlewares/requestTrack'
+app.use(requestTrack.default)
+
 const index = require('./routes/index')
 app.use(index.routes()).use(index.allowedMethods())
 app.use(router.routes()).use(router.allowedMethods())
