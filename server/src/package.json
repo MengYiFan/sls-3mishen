@@ -6,7 +6,7 @@
   "typings": "./index.d.ts",
   "scripts": {
     "start": "nodemon --config nodemon.json -e ts,tsx sls.js",
-    "dev": "cross-env NODE_ENV=development nodemon --watch routes --watch controllers --watch middlewares --watch utils --watch app.ts --watch config --ext html,js,ts,tsx,json -e ts,tsx --exec ts-node sls.js",
+    "dev": "cross-env NODE_ENV=development nodemon --watch core --watch routes --watch controllers --watch middlewares --watch utils --watch app.ts --watch config --ext html,js,ts,tsx,json -e ts,tsx --exec ts-node sls.js",
     "deplpy": "sls deploy",
     "layer": "sls deploy --target=./layer",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,7 +22,6 @@
     "koa": "^2.11.0",
     "koa-body": "^4.2.0",
     "koa-sendfile": "^2.0.1",
-    "mysql2": "^2.3.0",
     "tsconfig-paths": "^3.11.0"
   },
   "devDependencies": {
@@ -34,7 +33,10 @@
     "@types/koa__router": "^8.0.7",
     "@types/lodash": "^4.14.172",
     "@types/node": "^16.7.10",
+    "class-validator": "^0.13.1",
     "cross-env": "^7.0.3",
+    "lodash": "^4.17.21",
+    "mysql2": "^2.3.0",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   }

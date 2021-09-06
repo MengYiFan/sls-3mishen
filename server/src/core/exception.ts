@@ -8,16 +8,16 @@ interface ErrorInfo {
 
 export interface Exception {
   success?: boolean
-  resulut?: any
+  result?: any
   error?: ErrorInfo
 }
 
-export class HttpException extend Error {
+export class HttpException extends Error {
   public success: boolean = true
-  public resulut: any = null
-  public error: ErrorInfo = {}
+  public result: any = null
+  public error: ErrorInfo | null = null
 
-  constructor(ex: Exception) {
+  constructor(ex?: Exception) {
     super()
 
     if (ex && ex.success) {
@@ -25,19 +25,19 @@ export class HttpException extend Error {
       this.success = ex.success
     }
 
-    if (ex && ex.resulut) {
-      this.resulut = ex.resulut
+    if (ex && ex.result) {
+      this.result = ex.result
     }
 
     if (ex && ex.error) {
-      this.resulut = ex.error
+      this.error = ex.error
     }
   }
 }
 
 export class AutoFailed extends HttpException {
   public success = false
-  public resulut = null
+  public result = null
   public error = {
     code: 401,
     message: '认证失败'
@@ -51,12 +51,12 @@ export class AutoFailed extends HttpException {
       this.success = ex.success
     }
 
-    if (ex && ex.resulut) {
-      this.resulut = ex.resulut
+    if (ex && ex.result) {
+      this.result = ex.result
     }
 
     if (ex && ex.error) {
-      this.resulut = ex.error
+      this.error = ex.error
     }
   }
 }

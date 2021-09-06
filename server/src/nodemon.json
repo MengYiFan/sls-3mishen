@@ -3,7 +3,7 @@
   "delay": 300,
   "ignore": [".git", "node_modules"],
   "watch": [
-    "routes", "controllers", "middlewares", "utils", "app.ts", "config"
+    "routes", "controllers", "middlewares", "utils", "app.ts", "config", "core"
   ],
   "exec": "ts-node sls.js",
   "env": {

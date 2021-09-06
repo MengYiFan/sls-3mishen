@@ -1,16 +1,31 @@
-import { BaseContext, Next } from 'koa'
+import { Context, Next } from 'koa'
 import { createUUID } from 'utils/index'
+import { Exception, HttpException } from 'core/exception'
 
-const requestTrack = async (ctx: BaseContext, next: Next): Promise<void> => {
+const requestTrack = async (ctx: Context, next: Next): Promise<void> => {
   const requestID = createUUID()
-  
-  await next()
+  ctx.set('request-id', requestID)
+  try {
+    await next()
+  } catch(error: any) {
+    const isHttpException = error instanceof HttpException
+    const isDev = process.env.NODE_ENV === 'development'
 
-  if (Object.prototype.toString.call(ctx.body) === '[object Object]') {
-    console.log(1, ctx.body)
-    ctx.body = Object.assign({}, ctx.body, {
-      _: requestID
-    })
+    if (isDev && !isHttpException) {
+      throw error
+    }
+
+    const errorResp: Exception = {
+      success: false,
+      error: {
+        code: isHttpException ? error?.errorCode : 999,
+        message: error.msg || ''
+      },
+      result: null
+    }
+
+    ctx.body = errorResp
+    ctx.status = isHttpException ? error.code : 500
   }
 }
 

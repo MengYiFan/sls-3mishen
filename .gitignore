@@ -2,6 +2,7 @@
 **/node_modules
 **/.next
 **/tf/model
+**/sql
 
 # Log files
 **/npm-debug.log*

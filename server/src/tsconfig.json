@@ -4,7 +4,7 @@
     "paths": {
       "@utils/*": ["utils/*"]
     },
-    "target": "es2018",
+    "target": "ES2015",
     "module": "commonjs",
     "lib": ["es2018", "esnext.asynciterable"],
     "esModuleInterop": true,
