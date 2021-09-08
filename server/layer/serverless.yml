@@ -7,7 +7,7 @@ inputs:
   region: ap-shanghai
   name: ${name}
   src:
-    src: ../node_modules
+    src: ../src/node_modules
     targetDir: /node_modules
   runtimes:
     - Nodejs12.16
