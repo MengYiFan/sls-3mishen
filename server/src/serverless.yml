@@ -6,8 +6,10 @@ stage: dev
 inputs: 
   src: 
     src: ./
-    exclude: 
+    include:
       - .env
+    exclude: 
+      # - .env
       - node_modules/** # 打包在 layer 里，加快 deploy 速度
   type: web
   name: ${name}
@@ -46,3 +48,5 @@ inputs:
     variables:
       HOST: ${output:${stage}:${app}:${name}-db.connection.ip}
       PASSWORD: ${output:${stage}:${app}:${name}-db.adminPassword}
+  plugins:
+    - serverless-dotenv-plugin

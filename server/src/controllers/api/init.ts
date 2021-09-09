@@ -9,6 +9,7 @@ export const initDatabase = async (ctx: Context, next: Next) => {
   let secret = ctx.query.initSqlSecret
 
   if (secret !== process.env.INIT_SQL_SECRET) {
+    ctx.status = 401
     ctx.body = {
       success: false
     }
@@ -25,9 +26,13 @@ export const initDatabase = async (ctx: Context, next: Next) => {
     const conn = await mysql.createConnection({
       host, 
       user, 
-      database
+      password,
+      port
     })
-    
+    conn.connect()
+
+    await conn.query(`CREATE DATABASE IF NOT EXISTS ${database} DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`)
+    await conn.query(`USE ${database};`)
     await Promise.all(sqlList.map(async sql => {
       await conn.query(sql)
     }))

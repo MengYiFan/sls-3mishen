@@ -5,7 +5,7 @@ component: vpc
 name: koa-3mish-vpc
 
 inputs:
-  region: ${env:REGION}
-  zone: ${env:ZONE}
+  region: ap-shanghai
+  zone: ap-shanghai-2
   vpcName: serverless-mysql
   subnetName: serverless-mysql

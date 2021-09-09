@@ -21,7 +21,7 @@ const requestTrack = async (ctx: Context, next: Next): Promise<void> => {
         code: isHttpException ? error?.errorCode : 999,
         message: error.msg || ''
       },
-      result: null
+      result: error
     }
 
     ctx.body = errorResp

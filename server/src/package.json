@@ -22,21 +22,22 @@
     "koa": "^2.11.0",
     "koa-body": "^4.2.0",
     "koa-sendfile": "^2.0.1",
+    "lodash": "^4.17.21",
+    "mysql2": "^2.3.0",
     "tsconfig-paths": "^3.11.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/koa": "^2.13.4",
-    "@types/koa-bodyparser": "^4.3.3",
     "@types/koa__cors": "^3.0.3",
     "@types/koa__router": "^8.0.7",
+    "@types/koa-bodyparser": "^4.3.3",
     "@types/lodash": "^4.14.172",
     "@types/node": "^16.7.10",
     "class-validator": "^0.13.1",
     "cross-env": "^7.0.3",
-    "lodash": "^4.17.21",
-    "mysql2": "^2.3.0",
+    "serverless-dotenv-plugin": "^3.9.0",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   }

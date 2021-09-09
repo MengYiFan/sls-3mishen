@@ -5,8 +5,8 @@ component: cynosdb
 name: koa-3mish-db
 
 inputs:
-  region: ${env:REGION}
-  zone: ${env:ZONE}
+  region: ap-shanghai
+  zone: ap-shanghai-2
   vpcConfig:
     vpcId: ${output:${stage}:${app}:koa-3mish-vpc.vpcId}
     subnetId: ${output:${stage}:${app}:koa-3mish-vpc.subnetId}
