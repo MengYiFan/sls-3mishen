@@ -1,4 +1,9 @@
 ### Todo list
+  - 确定设计 or 引用第三方可靠的评论和社交系统 - 09.18
+  - 程序关键的阅读和反馈交互设计 - 09.18
+##### 评论系统的设计
+
+
 ##### interface
 - User
   - get:  /user/:id/info
@@ -53,7 +58,6 @@
   - get:  /get/home/banner
   - get:  /get/activity/banner
   
-
 
 
 

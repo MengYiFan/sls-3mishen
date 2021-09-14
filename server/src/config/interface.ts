@@ -1,14 +1,19 @@
+import { partial } from "lodash"
+
 export enum charset {
   utf8_general_ci = 'utf8_general_ci'
 }
-export interface dbInterface {
-  host: string | undefined
+
+interface dbInterfaceConfig {
+  host: string
   port: number
-  user: string | undefined
-  password?: string
-  database: string | undefined
-  charset?: charset
+  user: string
+  password: string
+  database: string
+  charset: charset
 }
+
+export type dbInterface = Partial<dbInterfaceConfig>
 
 export interface configInterface {
   db: dbInterface
