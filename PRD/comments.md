@@ -1,4 +1,8 @@
-## 评论（跟帖）系统设计
+## **评论（跟帖）系统设计**
+```
+  为了更好的营造有趣、和谐、独特的社区氛围，加深黏性和趣味性。
+```
+
 - **评论交互**
 - 在内容展示区，用户都可以做评论操作，如故事、章节、句、弹幕和评论本身
 - 根据内容区的所示范围，可将评论形态分：`长评、短评`。如在故事和章节处，可做长评或短评，而在句、弹幕这类就只有短评
@@ -17,17 +21,59 @@
   - 已删除或无效的均不会展示出来，待审核状态的仅作者自己可见
   - 无效是指没有通过审核的评论
 
+### **名词解释**
+| 名词 | 描述 |
+| :---- | :----: |
+| 评论 | 即对文章、章节等的评论 |
+| 评价 | 对已有的评论做点赞、踩等的操作 |
+| 评论池 | 其实就是将该条评论的 `isAudit` 置为 0，且仅自己可见 |
+| 回复的回复 | 即在评论下的回复被人回复 |
+| 表情和赞、踩 | 由于赞、踩是高频且成本相对表情低 |
+### **评论**
 | 字段 | 类型 | 说明 |
 | :---- | :----: | :---- |
 | ID | int(11) | NOT NULL AUTO_INCREMENT
-| userID | int(11) | 评论用户ID |
-| content | varchar(255) | NOT NULL
-| date | timestamp | NOT NULL DEFAULT CURRENT_TIMESTAMP
-| source | int(11) | 评论源ID(故事ID/章节ID等)
-| replyID | int(11) | 回复ID
-| source | varchar(255) | 来源(wx/web/app等)
-| platform | varchar(255) | 设备、平台
-| IP | varchar(255) |
-| isDelete | tinyint(1) | unsigned DEFAULT '0'
-| isAudit | tinyint(1) | unsigned DEFAULT '0'
-| label | tinyint(1) | 标记枚举(精彩、常规、无帮助、无效)，默认无效
+| from_uid | int(11) | 评论用户ID |
+| content | varchar(255) | NOT NULL |
+| created_at | timestamp | NOT NULL DEFAULT CURRENT_TIMESTAMP |
+| reply_source | int(11) | 评论源ID(故事ID/章节ID等) |
+| platform | varchar(255) | 设备、平台，来源(wx/web/app等) |
+| IP | varchar(255) | 当前设备IP, 可空 |
+| is_delete | tinyint(1) | unsigned DEFAULT '0' |
+| is_audit | tinyint(1) | unsigned DEFAULT '0' |
+| label | tinyint(1) | 标记枚举(精彩、常规、无帮助、无效)，默认无效 |
+| invalidReason | varchar(255) | 无效原因 |
+
+### **表情互动**
+| 字段 | 类型 | 说明 |
+| :---- | :----: | :---- |
+| ID | int(11) | NOT NULL AUTO_INCREMENT |
+| from_uid | int(11) | 评论用户ID |
+| to_uid | int(11) | 被评论用户ID |
+| comment_id | int(11) | 被回复的评论ID |
+| reply_id | int(11) | 被回复的回复ID |
+| emoji_id | int(1) | 表情枚举 |
+| created_at | timestamp | NOT NULL DEFAULT CURRENT_TIMESTAMP |
+| reply_source | int(11) | 评论源ID(故事ID/章节ID等) |
+| platform | varchar(255) | 设备、平台，来源(wx/web/app等) |
+| IP | varchar(255) | 当前设备IP, 可空 |
+| is_delete | tinyint(1) | unsigned DEFAULT '0' |
+| UNIQUE KEY| | `UK_commont_emoji` (`from_uid`,`to_uid`, `comment_id`, `reply_id`, `emoji`) |
+
+### **回复**
+| 字段 | 类型 | 说明 |
+| :---- | :----: | :---- |
+| ID | int(11) | NOT NULL AUTO_INCREMENT |
+| from_uid | int(11) | 评论用户ID |
+| to_uid | int(11) | 被评论用户ID |
+| comment_id | int(11) | 被回复的评论ID |
+| reply_id | int(11) | 被回复的回复ID |
+| content | varchar(255) | NOT NULL |
+| created_at | timestamp | NOT NULL DEFAULT CURRENT_TIMESTAMP |
+| reply_source | int(11) | 评论源ID(故事ID/章节ID等) |
+| platform | varchar(255) | 设备、平台，来源(wx/web/app等) |
+| IP | varchar(255) | 当前设备IP, 可空 |
+| isDelete | tinyint(1) | unsigned DEFAULT '0' |
+| isAudit | tinyint(1) | unsigned DEFAULT '0' |
+| label | tinyint(1) | 标记枚举(精彩、常规、无帮助、无效)，默认无效 |
+| invalidReason | varchar(255) | 无效原因 |
