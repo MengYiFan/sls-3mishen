@@ -3,7 +3,6 @@
   - 程序关键的阅读和反馈交互设计 - 09.18
 ##### 评论系统的设计
 
-
 ##### interface
 - User
   - get:  /user/:id/info
@@ -58,11 +57,6 @@
   - get:  /get/home/banner
   - get:  /get/activity/banner
   
-
-
-
-
-
 ##### 待确认和解决
 - add a new declaration (.d.ts) file containing `declare module 'koa-sendfile';`
   在 `index.d.ts declare` 了也无效，当前是通过 `tsconfig.json` 里设置 `noImplicitAny: false` 解决
