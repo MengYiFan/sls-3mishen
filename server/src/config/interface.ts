@@ -1,5 +1,3 @@
-import { partial } from "lodash"
-
 export enum charset {
   utf8_general_ci = 'utf8_general_ci'
 }
